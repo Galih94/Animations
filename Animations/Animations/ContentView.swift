@@ -21,7 +21,7 @@ struct ContentView: View {
             .foregroundStyle(.white)
             .clipShape(.ellipse)
             .rotation3DEffect(
-                .degrees(animationAmount), axis: (x: 0.0, y: 1.0, z: 0.0)
+                .degrees(animationAmount), axis: (x: 1.0, y: 0.0, z: 0.0)
             )
         }
     }
