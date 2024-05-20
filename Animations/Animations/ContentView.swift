@@ -22,13 +22,15 @@ struct ContentView: View {
                         })
                         .onEnded({ value in
                             // MARK: to reset to og place
-                            dragAmount = .zero
+                            withAnimation(.bouncy) {
+                                
+                                dragAmount = .zero
+                            }
                             
                             // MARK: to place it as it is
 //                            dragAmount = value.translation
                         })
                 )
-                .animation(.bouncy, value: dragAmount)
         }
     }
 }
