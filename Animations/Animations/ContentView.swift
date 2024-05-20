@@ -20,8 +20,12 @@ struct ContentView: View {
                         .onChanged({ value in
                             dragAmount = value.translation
                         })
-                        .onEnded({ _ in
-                            dragAmount = .zero
+                        .onEnded({ value in
+                            // MARK: to reset to og place
+//                            dragAmount = .zero
+                            
+                            // MARK: to place it as it is
+                            dragAmount = value.translation
                         })
                 )
         }
