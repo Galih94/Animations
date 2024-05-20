@@ -8,30 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    let letters = Array("Helllo SwiftUI")
     @State private var dragAmount = CGSize.zero
+    @State private var enable = false
     var body: some View {
-        return VStack {
-            LinearGradient(colors: [.yellow, .red], startPoint: .topLeading, endPoint: .bottomTrailing)
-                .frame(width: 300, height: 200)
-                .clipShape(.rect(cornerRadius: 10))
-                .offset(dragAmount)
-                .gesture(
-                    DragGesture()
-                        .onChanged({ value in
-                            dragAmount = value.translation
-                        })
-                        .onEnded({ value in
-                            // MARK: to reset to og place
-                            withAnimation(.bouncy) {
-                                
-                                dragAmount = .zero
-                            }
-                            
-                            // MARK: to place it as it is
-//                            dragAmount = value.translation
-                        })
-                )
+        HStack(spacing: 0) {
+            ForEach(0..<letters.count, id: \.self) { index in
+                Text(String(letters[index]))
+                    .padding(5)
+                    .font(.title)
+                    .background(enable ? .blue : .red)
+                    .offset(dragAmount)
+                    .animation(.linear.delay(Double(index) / 20), value: dragAmount)
+            }
         }
+        .gesture(
+            DragGesture()
+                .onChanged({ value in
+                    dragAmount = value.translation
+                })
+                .onEnded({ _ in
+                    dragAmount = .zero
+                    enable.toggle()
+                })
+        )
     }
 }
 
